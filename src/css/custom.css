@@ -1,0 +1,39 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ * 
+ * Use the color generator provided by Docusaurus to generate
+ * a color palette for your site: 
+ * https://docusaurus.io/docs/styling-layout/#styling-your-site-with-infima
+ */
+
+/* You can override the default Infima variables here. */
+
+/* @TODO: 
+  * Find a way to change background color on light mode (white variant)
+  * and dark mode (black variant) without using !important.
+*/
+:root {
+	--ifm-color-primary: #2c3e94;
+	--ifm-color-primary-dark: #283885;
+	--ifm-color-primary-darker: #25357e;
+	--ifm-color-primary-darkest: #1f2b68;
+	--ifm-color-primary-light: #3044a3;
+	--ifm-color-primary-lighter: #3347aa;
+	--ifm-color-primary-lightest: #1f2b68;
+	--ifm-code-font-size: 95%;
+	--docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme="dark"] {
+	--ifm-color-primary: #6ca0dc;
+	--ifm-color-primary-dark: #79a9df;
+	--ifm-color-primary-darker: #86b1e2;
+	--ifm-color-primary-darkest: #a1c2e9;
+	--ifm-color-primary-light: #86b1e2;
+	--ifm-color-primary-lighter: #94bae5;
+	--ifm-color-primary-lightest: #bbd3ef;
+	--docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
