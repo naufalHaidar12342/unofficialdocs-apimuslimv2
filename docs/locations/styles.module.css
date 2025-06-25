@@ -1,0 +1,9 @@
+.wrapper-table-section {
+	display: flex;
+	flex-direction: column;
+	column-gap: calc(0.6rem * 1);
+}
+.table-section {
+	display: flex;
+	flex-direction: column;
+}
