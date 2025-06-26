@@ -1,0 +1,97 @@
+---
+sidebar_position: 4
+---
+
+import Link from "@docusaurus/Link";
+
+# Get Du'a
+
+Some examples of getting du'a from API Muslim v2
+
+## Get Random Du'a
+
+Similar to <Link to={"/docs/getting-started/quran-verses#get-random-qurans-verses"}>Get Random Qur'an Verses</Link>, you can get a random du'a by using either `acak` or `random` endpoint.
+
+### Random du'a using `acak` endpoint
+
+:::info
+
+`acak` is the Indonesian word for `random`.
+
+:::
+
+```http title="HTTP GET"
+https://api.myquran.com/v2/doa/acak
+```
+
+```json title="Response"
+{
+	"status": true,
+	"request": {
+		"path": "/doa/acak",
+		"id": 27
+	},
+	"data": {
+		"arab": "رَبِّ ٱبْنِ لِى عِندَكَ بَيْتًا فِى ٱلْجَنَّةِ وَنَجِّنِى مِن فِرْعَوْنَ وَعَمَلِهِۦ وَنَجِّنِى مِنَ ٱلْقَوْمِ ٱلظَّٰلِمِينَ",
+		"indo": "Ya Tuhanku, bangunlah untukku sebuah rumah di sisi-Mu dalam sorga, dan selamatkanlah aku dari Fir'aun dan perbuatannya, serta selamatkanlah aku dari kaum yang zhalim.",
+		"judul": "Doa Agar Diberi Bangunan Indah di Surga",
+		"source": "quran"
+	}
+}
+```
+
+### Random du'a using `random` endpoint
+
+```http title="HTTP GET"
+https://api.myquran.com/v2/doa/random
+```
+
+```json title="Response"
+{
+	"status": true,
+	"request": {
+		"path": "/doa/random",
+		"id": 103
+	},
+	"data": {
+		"arab": "صَلَّى اللهُ عَلَى نَبِيِّنَا مُحَمَّدٍ كُلَّمَا ذَكَرَهُ الذَّاكِرُوْنَ وَغَفَلَ عَنْ ذِكْرِهِ الْغَافِلُوْنَ",
+		"indo": "Ya Allah, limpahkanlah shalawat atas nabi kami, Nabi Muhammad SAW, selama orang-orang yang ingat menyebut-Mu dan orang-orang yang lalai lupa untuk menyebut-Mu.",
+		"judul": "Shalawat Pengampun Dosa",
+		"source": "lainnya"
+	}
+}
+```
+
+## Get Specific Du'a by `id`
+
+In API Muslim v2, `id` for doa (du'a) range from 1-108.
+
+```http title="HTTP GET"
+https://api.myquran.com/v2/doa/{id}
+```
+
+For example, let us try to get du'a with `id`= 1.
+
+```http title="Get Du'a with id=1"
+https://api.myquran.com/v2/doa/1
+```
+
+```json title="Response"
+{
+	"status": true,
+	"request": {
+		"path": "/doa/1",
+		"id": "1"
+	},
+	"info": {
+		"min": 1,
+		"max": 108
+	},
+	"data": {
+		"arab": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+		"indo": "Ya Tuhan kami, berilah kami kebaikan di dunia dan kebaikan di akhirat, dan lindungilah kami dari azab neraka.",
+		"judul": "Doa Mohon Kebaikan Dunia dan Akhirat",
+		"source": "quran"
+	}
+}
+```

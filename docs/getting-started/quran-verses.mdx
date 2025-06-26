@@ -1,0 +1,164 @@
+---
+sidebar_position: 3
+---
+
+# Get Quran Verses
+
+Here are some examples of how to get Quran verses using the API.
+
+:::info
+In API Muslim v2, the developers put Indonesian as the main focus since it is intended for Indonesian users. Therefore, you will find lots of Indonesian words in the API responses for getting Quran verses.
+:::
+
+## Get Random Quran's Verses
+
+For getting random verses, API Muslim v2 accept `acak` and `random` parameter.
+
+### Get random verse using `acak` parameter
+
+:::info
+
+`acak` is Indonesian for "random"
+
+:::
+
+```http title="HTTP GET"
+https://api.myquran.com/v2/quran/ayat/acak
+```
+
+```json title="Response"
+{
+	"status": true,
+	"request": {
+		"path": "/quran/ayat/acak"
+	},
+	"data": {
+		"info": {
+			"surat": {
+				"id": 10,
+				"nama": {
+					"ar": "يونس",
+					"id": "Yunus"
+				},
+				"relevasi": "Makkiyyah",
+				"ayat_max": 109
+			}
+		},
+		"ayat": {
+			"arab": "يْوَنَجِّنَا بِرَحْمَتِكَ مِنَ الْقَوْمِ الْكٰفِرِنَ",
+			"asbab": "0",
+			"audio": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/1450",
+			"ayah": "86",
+			"hizb": "22.5",
+			"id": "1450",
+			"juz": "11",
+			"latin": "Wa najjinā biraḥmatika minal-qaumil-kāfirīn(a). ",
+			"notes": null,
+			"page": "218",
+			"surah": "10",
+			"text": "Selamatkanlah pula kami dengan rahmat-Mu dari kaum yang kafir.”",
+			"theme": "395"
+		}
+	}
+}
+```
+
+In this example, we got ayat (verse) number 86 from Surah (Chapter) Yunus (Jonah). For English translation, you can check here for example: [Quran.com - Surah Yunus, verse 86](https://quran.com/10/86)
+
+### Get random verse using `random` parameter
+
+```http title="HTTP GET"
+https://api.myquran.com/v2/quran/ayat/random
+```
+
+```json title="Response"
+{
+	"status": true,
+	"request": {
+		"path": "/quran/ayat/random"
+	},
+	"data": {
+		"info": {
+			"surat": {
+				"id": 11,
+				"nama": {
+					"ar": "هود",
+					"id": "Hud"
+				},
+				"relevasi": "Makkiyyah",
+				"ayat_max": 123
+			}
+		},
+		"ayat": {
+			"arab": "مُسَوَّمَةً عِنْدَ رَبِّكَۗ وَمَا هِيَ مِنَ الظّٰلِمِيْنَ بِبَعِيْدٍ ࣖ",
+			"asbab": "0",
+			"audio": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/1556",
+			"ayah": "83",
+			"hizb": "23.75",
+			"id": "1556",
+			"juz": "12",
+			"latin": "Musawwamatan ‘inda rabbik(a) wa mā hiya minaẓ-ẓālimīna biba‘īd(in). ",
+			"notes": null,
+			"page": "231",
+			"surah": "11",
+			"text": "(Batu-batu itu) diberi tanda dari sisi Tuhanmu. Siksaan itu tiadalah jauh dari orang yang zalim.",
+			"theme": "422"
+		}
+	}
+}
+```
+
+In this example, we got ayat (verse) number 83 from Surah Hud (Prophet Hud). For English translation, you can check here for example: [Quran.com - Surah Hud, verse 83](https://quran.com/11/83)
+
+## Get Specific Quran's Verse Using Surah and Ayat Number
+
+API Muslim v2 use numbers to identify Surah (Chapter) and Ayat (Verse) in the Quran. We can use the following endpoint to get a specific verse:
+
+```http title="HTTP GET"
+https://api.myquran.com/v2/quran/ayat/{surat-number}/{ayat-number}
+```
+
+In this example, we will use the first Surah Al-Fatihah (The Opening) and the first Ayat (Verse) in it.
+
+```http title="Get Surah Al-Fatihah, Ayat 1"
+https://api.myquran.com/v2/quran/ayat/1/1
+```
+
+```json title="Response"
+{
+	"status": true,
+	"request": {
+		"path": "/quran/ayat/1/1",
+		"surat": "1",
+		"ayat": "1"
+	},
+	"info": {
+		"surat": {
+			"id": 1,
+			"nama": {
+				"ar": "الفاتحة",
+				"id": "Al-Fatihah"
+			},
+			"relevasi": "Makkiyyah",
+			"ayat_max": 7
+		}
+	},
+	"data": [
+		{
+			"arab": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ",
+			"asbab": "0",
+			"audio": "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/1",
+			"ayah": "1",
+			"hizb": null,
+			"id": "1",
+			"juz": "1",
+			"latin": "Bismillāhir-raḥmānir-raḥīm(i). ",
+			"notes": null,
+			"page": "1",
+			"surah": "1",
+			"text": "Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang.",
+			"theme": null
+		}
+	]
+}
+```

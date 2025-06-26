@@ -1,0 +1,915 @@
+---
+sidebar_position: 2
+---
+
+import Link from "@docusaurus/Link";
+
+# Get Prayer Times
+
+Here are some examples of how to get daily prayer times and monthly prayer times.
+
+In these examples, we will use Semarang as the location. Semarang has the `id` of `1433`. You can find the list that shows the `KOTA SEMARANG` id here: <Link to={"/docs/locations#location-81-wonosobo-regency---location-90-kulon-progo-regency"}>`KOTA SEMARANG` id</Link> page.
+
+## Daily Prayer Times
+
+To get the daily prayer times, we are using this endpoint. I have compiled the list of all locations ID can be found in <Link to={"/docs/locations"}>Location</Link> page.
+
+```http title="HTTP GET"
+https://api.myquran.com/v2/sholat/jadwal/{location-id}/{date}
+```
+
+:::info `date` format
+
+API Muslim v2 accept these formats for the `date` parameter. Feel free to choose one of these formats:
+
+- `yyyy/mm/dd`
+  - Example: `2025/06/26`
+- `yyyy-mm-dd`
+  - Example: `2025-06-26`
+
+:::
+
+### Example of fetching daily prayer times using `yyyy/mm/dd` date format
+
+```http title="Daily Prayer Times for Semarang on 26 June 2025 (June 26, 2025)"
+https://api.myquran.com/v2/sholat/jadwal/1433/2025/06/26
+```
+
+```json title="Response"
+{
+	"status": true,
+	"request": {
+		"path": "/sholat/jadwal/1433/2025/06/26"
+	},
+	"data": {
+		"id": 1433,
+		"lokasi": "KOTA SEMARANG",
+		"daerah": "JAWA TENGAH",
+		"jadwal": {
+			"tanggal": "Kamis, 26/06/2025",
+			"imsak": "04:18",
+			"subuh": "04:28",
+			"terbit": "05:46",
+			"dhuha": "06:16",
+			"dzuhur": "11:45",
+			"ashar": "15:05",
+			"maghrib": "17:36",
+			"isya": "18:50",
+			"date": "2025-06-26"
+		}
+	}
+}
+```
+
+:::info 24-hour Format
+
+In API Muslim v2, prayer times use the 24-hour format, as it is the common hour format being used in Indonesia. To convert it to 12-hour format, you can use the following rules:
+
+- If the hour is less than 12, it is AM (ante meridian) time.
+- If the hour is 12, it is noon (12 PM).
+- If the hour is greater than 12, subtract 12 to get the PM (post meridian) time.
+
+:::
+
+### Example of fetching daily prayer times using `yyyy-mm-dd` date format
+
+```http title="Daily Prayer Times for Semarang in 26 June 2025 (June 26, 2025)"
+https://api.myquran.com/v2/sholat/jadwal/1433/2025-06-26
+```
+
+```json title="Response"
+{
+	"status": true,
+	"request": {
+		"path": "/sholat/jadwal/1433/2025-06-26",
+		"year": "2025",
+		"month": "06",
+		"date": "26"
+	},
+	"data": {
+		"id": 1433,
+		"lokasi": "KOTA SEMARANG",
+		"daerah": "JAWA TENGAH",
+		"jadwal": {
+			"tanggal": "Kamis, 26/06/2025",
+			"imsak": "04:18",
+			"subuh": "04:28",
+			"terbit": "05:46",
+			"dhuha": "06:16",
+			"dzuhur": "11:45",
+			"ashar": "15:05",
+			"maghrib": "17:36",
+			"isya": "18:50",
+			"date": "2025-06-26"
+		}
+	}
+}
+```
+
+## Monthly Prayer Times
+
+Monthly prayer times require less part compared to daily prayer times. You only need to provide the year and month.
+
+```http title="HTTP GET"
+https://api.myquran.com/v2/sholat/jadwal/{year}/{month}
+```
+
+:::warning
+
+Monthly prayer times ONLY accept `yyyy/mm` or `yyyy/m` date format.
+If you use `yyyy-mm` or `yyyy-m`, the API will return an 404 error. In this example, we also use `KOTA SEMARANG` and June 2025 as the parameter.
+
+```json title="Error Response"
+{
+	"status": false,
+	"error": 404,
+	"message": "page not found",
+	"request": {
+		"path": "/sholat/jadwal/1433/2025-06"
+	}
+}
+```
+
+:::
+
+### Valid Year and Month Format for Monthly Prayer Times
+
+For year and month using `yyyy/mm` format, January is `01`, February is `02`, and so on. For example, June is `06`.
+
+You can also use `yyyy/m` format, where January is `1`, February is `2`, and so on. For example, June is `6`.
+
+### Example of fetching monthly prayer times using `yyyy/m` date format
+
+Using the same location, Semarang, with `id` of `1433`, here is the example of fetching monthly prayer times for June 2025.
+
+```http title="Monthly Prayer Times for Semarang in June 2025"
+https://api.myquran.com/v2/sholat/jadwal/1433/2025/6
+```
+
+<details>
+	<summary>Response for `yyyy/m` date format</summary>
+```json 
+{
+	"status": true,
+	"request": {
+		"path": "/sholat/jadwal/1433/2025/6"
+	},
+	"data": {
+		"id": 1433,
+		"lokasi": "KOTA SEMARANG",
+		"daerah": "JAWA TENGAH",
+		"jadwal": [
+			{
+				"tanggal": "Minggu, 01/06/2025",
+				"imsak": "04:13",
+				"subuh": "04:23",
+				"terbit": "05:41",
+				"dhuha": "06:10",
+				"dzuhur": "11:40",
+				"ashar": "15:00",
+				"maghrib": "17:32",
+				"isya": "18:45",
+				"date": "2025-06-01"
+			},
+			{
+				"tanggal": "Senin, 02/06/2025",
+				"imsak": "04:13",
+				"subuh": "04:23",
+				"terbit": "05:41",
+				"dhuha": "06:10",
+				"dzuhur": "11:40",
+				"ashar": "15:00",
+				"maghrib": "17:32",
+				"isya": "18:45",
+				"date": "2025-06-02"
+			},
+			{
+				"tanggal": "Selasa, 03/06/2025",
+				"imsak": "04:14",
+				"subuh": "04:24",
+				"terbit": "05:41",
+				"dhuha": "06:10",
+				"dzuhur": "11:40",
+				"ashar": "15:00",
+				"maghrib": "17:32",
+				"isya": "18:45",
+				"date": "2025-06-03"
+			},
+			{
+				"tanggal": "Rabu, 04/06/2025",
+				"imsak": "04:14",
+				"subuh": "04:24",
+				"terbit": "05:41",
+				"dhuha": "06:10",
+				"dzuhur": "11:40",
+				"ashar": "15:00",
+				"maghrib": "17:32",
+				"isya": "18:46",
+				"date": "2025-06-04"
+			},
+			{
+				"tanggal": "Kamis, 05/06/2025",
+				"imsak": "04:14",
+				"subuh": "04:24",
+				"terbit": "05:41",
+				"dhuha": "06:11",
+				"dzuhur": "11:40",
+				"ashar": "15:01",
+				"maghrib": "17:32",
+				"isya": "18:46",
+				"date": "2025-06-05"
+			},
+			{
+				"tanggal": "Jumat, 06/06/2025",
+				"imsak": "04:14",
+				"subuh": "04:24",
+				"terbit": "05:42",
+				"dhuha": "06:11",
+				"dzuhur": "11:40",
+				"ashar": "15:01",
+				"maghrib": "17:32",
+				"isya": "18:46",
+				"date": "2025-06-06"
+			},
+			{
+				"tanggal": "Sabtu, 07/06/2025",
+				"imsak": "04:14",
+				"subuh": "04:24",
+				"terbit": "05:42",
+				"dhuha": "06:11",
+				"dzuhur": "11:41",
+				"ashar": "15:01",
+				"maghrib": "17:32",
+				"isya": "18:46",
+				"date": "2025-06-07"
+			},
+			{
+				"tanggal": "Minggu, 08/06/2025",
+				"imsak": "04:15",
+				"subuh": "04:25",
+				"terbit": "05:42",
+				"dhuha": "06:11",
+				"dzuhur": "11:41",
+				"ashar": "15:01",
+				"maghrib": "17:32",
+				"isya": "18:46",
+				"date": "2025-06-08"
+			},
+			{
+				"tanggal": "Senin, 09/06/2025",
+				"imsak": "04:15",
+				"subuh": "04:25",
+				"terbit": "05:42",
+				"dhuha": "06:12",
+				"dzuhur": "11:41",
+				"ashar": "15:01",
+				"maghrib": "17:32",
+				"isya": "18:47",
+				"date": "2025-06-09"
+			},
+			{
+				"tanggal": "Selasa, 10/06/2025",
+				"imsak": "04:15",
+				"subuh": "04:25",
+				"terbit": "05:43",
+				"dhuha": "06:12",
+				"dzuhur": "11:41",
+				"ashar": "15:02",
+				"maghrib": "17:33",
+				"isya": "18:47",
+				"date": "2025-06-10"
+			},
+			{
+				"tanggal": "Rabu, 11/06/2025",
+				"imsak": "04:15",
+				"subuh": "04:25",
+				"terbit": "05:43",
+				"dhuha": "06:12",
+				"dzuhur": "11:41",
+				"ashar": "15:02",
+				"maghrib": "17:33",
+				"isya": "18:47",
+				"date": "2025-06-11"
+			},
+			{
+				"tanggal": "Kamis, 12/06/2025",
+				"imsak": "04:15",
+				"subuh": "04:25",
+				"terbit": "05:43",
+				"dhuha": "06:12",
+				"dzuhur": "11:42",
+				"ashar": "15:02",
+				"maghrib": "17:33",
+				"isya": "18:47",
+				"date": "2025-06-12"
+			},
+			{
+				"tanggal": "Jumat, 13/06/2025",
+				"imsak": "04:15",
+				"subuh": "04:25",
+				"terbit": "05:43",
+				"dhuha": "06:13",
+				"dzuhur": "11:42",
+				"ashar": "15:02",
+				"maghrib": "17:33",
+				"isya": "18:47",
+				"date": "2025-06-13"
+			},
+			{
+				"tanggal": "Sabtu, 14/06/2025",
+				"imsak": "04:16",
+				"subuh": "04:26",
+				"terbit": "05:44",
+				"dhuha": "06:13",
+				"dzuhur": "11:42",
+				"ashar": "15:02",
+				"maghrib": "17:33",
+				"isya": "18:48",
+				"date": "2025-06-14"
+			},
+			{
+				"tanggal": "Minggu, 15/06/2025",
+				"imsak": "04:16",
+				"subuh": "04:26",
+				"terbit": "05:44",
+				"dhuha": "06:13",
+				"dzuhur": "11:42",
+				"ashar": "15:03",
+				"maghrib": "17:34",
+				"isya": "18:48",
+				"date": "2025-06-15"
+			},
+			{
+				"tanggal": "Senin, 16/06/2025",
+				"imsak": "04:16",
+				"subuh": "04:26",
+				"terbit": "05:44",
+				"dhuha": "06:13",
+				"dzuhur": "11:42",
+				"ashar": "15:03",
+				"maghrib": "17:34",
+				"isya": "18:48",
+				"date": "2025-06-16"
+			},
+			{
+				"tanggal": "Selasa, 17/06/2025",
+				"imsak": "04:16",
+				"subuh": "04:26",
+				"terbit": "05:44",
+				"dhuha": "06:14",
+				"dzuhur": "11:43",
+				"ashar": "15:03",
+				"maghrib": "17:34",
+				"isya": "18:48",
+				"date": "2025-06-17"
+			},
+			{
+				"tanggal": "Rabu, 18/06/2025",
+				"imsak": "04:17",
+				"subuh": "04:27",
+				"terbit": "05:45",
+				"dhuha": "06:14",
+				"dzuhur": "11:43",
+				"ashar": "15:03",
+				"maghrib": "17:34",
+				"isya": "18:48",
+				"date": "2025-06-18"
+			},
+			{
+				"tanggal": "Kamis, 19/06/2025",
+				"imsak": "04:17",
+				"subuh": "04:27",
+				"terbit": "05:45",
+				"dhuha": "06:14",
+				"dzuhur": "11:43",
+				"ashar": "15:03",
+				"maghrib": "17:34",
+				"isya": "18:49",
+				"date": "2025-06-19"
+			},
+			{
+				"tanggal": "Jumat, 20/06/2025",
+				"imsak": "04:17",
+				"subuh": "04:27",
+				"terbit": "05:45",
+				"dhuha": "06:14",
+				"dzuhur": "11:43",
+				"ashar": "15:04",
+				"maghrib": "17:35",
+				"isya": "18:49",
+				"date": "2025-06-20"
+			},
+			{
+				"tanggal": "Sabtu, 21/06/2025",
+				"imsak": "04:17",
+				"subuh": "04:27",
+				"terbit": "05:45",
+				"dhuha": "06:14",
+				"dzuhur": "11:44",
+				"ashar": "15:04",
+				"maghrib": "17:35",
+				"isya": "18:49",
+				"date": "2025-06-21"
+			},
+			{
+				"tanggal": "Minggu, 22/06/2025",
+				"imsak": "04:17",
+				"subuh": "04:27",
+				"terbit": "05:45",
+				"dhuha": "06:15",
+				"dzuhur": "11:44",
+				"ashar": "15:04",
+				"maghrib": "17:35",
+				"isya": "18:49",
+				"date": "2025-06-22"
+			},
+			{
+				"tanggal": "Senin, 23/06/2025",
+				"imsak": "04:18",
+				"subuh": "04:28",
+				"terbit": "05:46",
+				"dhuha": "06:15",
+				"dzuhur": "11:44",
+				"ashar": "15:04",
+				"maghrib": "17:35",
+				"isya": "18:50",
+				"date": "2025-06-23"
+			},
+			{
+				"tanggal": "Selasa, 24/06/2025",
+				"imsak": "04:18",
+				"subuh": "04:28",
+				"terbit": "05:46",
+				"dhuha": "06:15",
+				"dzuhur": "11:44",
+				"ashar": "15:05",
+				"maghrib": "17:35",
+				"isya": "18:50",
+				"date": "2025-06-24"
+			},
+			{
+				"tanggal": "Rabu, 25/06/2025",
+				"imsak": "04:18",
+				"subuh": "04:28",
+				"terbit": "05:46",
+				"dhuha": "06:15",
+				"dzuhur": "11:44",
+				"ashar": "15:05",
+				"maghrib": "17:36",
+				"isya": "18:50",
+				"date": "2025-06-25"
+			},
+			{
+				"tanggal": "Kamis, 26/06/2025",
+				"imsak": "04:18",
+				"subuh": "04:28",
+				"terbit": "05:46",
+				"dhuha": "06:16",
+				"dzuhur": "11:45",
+				"ashar": "15:05",
+				"maghrib": "17:36",
+				"isya": "18:50",
+				"date": "2025-06-26"
+			},
+			{
+				"tanggal": "Jumat, 27/06/2025",
+				"imsak": "04:18",
+				"subuh": "04:28",
+				"terbit": "05:46",
+				"dhuha": "06:16",
+				"dzuhur": "11:45",
+				"ashar": "15:05",
+				"maghrib": "17:36",
+				"isya": "18:50",
+				"date": "2025-06-27"
+			},
+			{
+				"tanggal": "Sabtu, 28/06/2025",
+				"imsak": "04:19",
+				"subuh": "04:29",
+				"terbit": "05:47",
+				"dhuha": "06:16",
+				"dzuhur": "11:45",
+				"ashar": "15:05",
+				"maghrib": "17:36",
+				"isya": "18:51",
+				"date": "2025-06-28"
+			},
+			{
+				"tanggal": "Minggu, 29/06/2025",
+				"imsak": "04:19",
+				"subuh": "04:29",
+				"terbit": "05:47",
+				"dhuha": "06:16",
+				"dzuhur": "11:45",
+				"ashar": "15:06",
+				"maghrib": "17:37",
+				"isya": "18:51",
+				"date": "2025-06-29"
+			},
+			{
+				"tanggal": "Senin, 30/06/2025",
+				"imsak": "04:19",
+				"subuh": "04:29",
+				"terbit": "05:47",
+				"dhuha": "06:16",
+				"dzuhur": "11:45",
+				"ashar": "15:06",
+				"maghrib": "17:37",
+				"isya": "18:51",
+				"date": "2025-06-30"
+			}
+		]
+	}
+}
+```
+
+</details>
+
+### Example of fetching monthly prayer times using `yyyy/mm` date format
+
+Using the same location, Semarang, with `id` of `1433`, here is the example of fetching monthly prayer times for June 2025.
+
+```http title="Monthly Prayer Times for Semarang in June 2025"
+https://api.myquran.com/v2/sholat/jadwal/1433/2025/06
+```
+
+<details>
+	<summary>Response for `yyyy/mm` date format</summary>
+```json 
+{
+	"status": true,
+	"request": {
+		"path": "/sholat/jadwal/1433/2025/06"
+	},
+	"data": {
+		"id": 1433,
+		"lokasi": "KOTA SEMARANG",
+		"daerah": "JAWA TENGAH",
+		"jadwal": [
+			{
+				"tanggal": "Minggu, 01/06/2025",
+				"imsak": "04:13",
+				"subuh": "04:23",
+				"terbit": "05:41",
+				"dhuha": "06:10",
+				"dzuhur": "11:40",
+				"ashar": "15:00",
+				"maghrib": "17:32",
+				"isya": "18:45",
+				"date": "2025-06-01"
+			},
+			{
+				"tanggal": "Senin, 02/06/2025",
+				"imsak": "04:13",
+				"subuh": "04:23",
+				"terbit": "05:41",
+				"dhuha": "06:10",
+				"dzuhur": "11:40",
+				"ashar": "15:00",
+				"maghrib": "17:32",
+				"isya": "18:45",
+				"date": "2025-06-02"
+			},
+			{
+				"tanggal": "Selasa, 03/06/2025",
+				"imsak": "04:14",
+				"subuh": "04:24",
+				"terbit": "05:41",
+				"dhuha": "06:10",
+				"dzuhur": "11:40",
+				"ashar": "15:00",
+				"maghrib": "17:32",
+				"isya": "18:45",
+				"date": "2025-06-03"
+			},
+			{
+				"tanggal": "Rabu, 04/06/2025",
+				"imsak": "04:14",
+				"subuh": "04:24",
+				"terbit": "05:41",
+				"dhuha": "06:10",
+				"dzuhur": "11:40",
+				"ashar": "15:00",
+				"maghrib": "17:32",
+				"isya": "18:46",
+				"date": "2025-06-04"
+			},
+			{
+				"tanggal": "Kamis, 05/06/2025",
+				"imsak": "04:14",
+				"subuh": "04:24",
+				"terbit": "05:41",
+				"dhuha": "06:11",
+				"dzuhur": "11:40",
+				"ashar": "15:01",
+				"maghrib": "17:32",
+				"isya": "18:46",
+				"date": "2025-06-05"
+			},
+			{
+				"tanggal": "Jumat, 06/06/2025",
+				"imsak": "04:14",
+				"subuh": "04:24",
+				"terbit": "05:42",
+				"dhuha": "06:11",
+				"dzuhur": "11:40",
+				"ashar": "15:01",
+				"maghrib": "17:32",
+				"isya": "18:46",
+				"date": "2025-06-06"
+			},
+			{
+				"tanggal": "Sabtu, 07/06/2025",
+				"imsak": "04:14",
+				"subuh": "04:24",
+				"terbit": "05:42",
+				"dhuha": "06:11",
+				"dzuhur": "11:41",
+				"ashar": "15:01",
+				"maghrib": "17:32",
+				"isya": "18:46",
+				"date": "2025-06-07"
+			},
+			{
+				"tanggal": "Minggu, 08/06/2025",
+				"imsak": "04:15",
+				"subuh": "04:25",
+				"terbit": "05:42",
+				"dhuha": "06:11",
+				"dzuhur": "11:41",
+				"ashar": "15:01",
+				"maghrib": "17:32",
+				"isya": "18:46",
+				"date": "2025-06-08"
+			},
+			{
+				"tanggal": "Senin, 09/06/2025",
+				"imsak": "04:15",
+				"subuh": "04:25",
+				"terbit": "05:42",
+				"dhuha": "06:12",
+				"dzuhur": "11:41",
+				"ashar": "15:01",
+				"maghrib": "17:32",
+				"isya": "18:47",
+				"date": "2025-06-09"
+			},
+			{
+				"tanggal": "Selasa, 10/06/2025",
+				"imsak": "04:15",
+				"subuh": "04:25",
+				"terbit": "05:43",
+				"dhuha": "06:12",
+				"dzuhur": "11:41",
+				"ashar": "15:02",
+				"maghrib": "17:33",
+				"isya": "18:47",
+				"date": "2025-06-10"
+			},
+			{
+				"tanggal": "Rabu, 11/06/2025",
+				"imsak": "04:15",
+				"subuh": "04:25",
+				"terbit": "05:43",
+				"dhuha": "06:12",
+				"dzuhur": "11:41",
+				"ashar": "15:02",
+				"maghrib": "17:33",
+				"isya": "18:47",
+				"date": "2025-06-11"
+			},
+			{
+				"tanggal": "Kamis, 12/06/2025",
+				"imsak": "04:15",
+				"subuh": "04:25",
+				"terbit": "05:43",
+				"dhuha": "06:12",
+				"dzuhur": "11:42",
+				"ashar": "15:02",
+				"maghrib": "17:33",
+				"isya": "18:47",
+				"date": "2025-06-12"
+			},
+			{
+				"tanggal": "Jumat, 13/06/2025",
+				"imsak": "04:15",
+				"subuh": "04:25",
+				"terbit": "05:43",
+				"dhuha": "06:13",
+				"dzuhur": "11:42",
+				"ashar": "15:02",
+				"maghrib": "17:33",
+				"isya": "18:47",
+				"date": "2025-06-13"
+			},
+			{
+				"tanggal": "Sabtu, 14/06/2025",
+				"imsak": "04:16",
+				"subuh": "04:26",
+				"terbit": "05:44",
+				"dhuha": "06:13",
+				"dzuhur": "11:42",
+				"ashar": "15:02",
+				"maghrib": "17:33",
+				"isya": "18:48",
+				"date": "2025-06-14"
+			},
+			{
+				"tanggal": "Minggu, 15/06/2025",
+				"imsak": "04:16",
+				"subuh": "04:26",
+				"terbit": "05:44",
+				"dhuha": "06:13",
+				"dzuhur": "11:42",
+				"ashar": "15:03",
+				"maghrib": "17:34",
+				"isya": "18:48",
+				"date": "2025-06-15"
+			},
+			{
+				"tanggal": "Senin, 16/06/2025",
+				"imsak": "04:16",
+				"subuh": "04:26",
+				"terbit": "05:44",
+				"dhuha": "06:13",
+				"dzuhur": "11:42",
+				"ashar": "15:03",
+				"maghrib": "17:34",
+				"isya": "18:48",
+				"date": "2025-06-16"
+			},
+			{
+				"tanggal": "Selasa, 17/06/2025",
+				"imsak": "04:16",
+				"subuh": "04:26",
+				"terbit": "05:44",
+				"dhuha": "06:14",
+				"dzuhur": "11:43",
+				"ashar": "15:03",
+				"maghrib": "17:34",
+				"isya": "18:48",
+				"date": "2025-06-17"
+			},
+			{
+				"tanggal": "Rabu, 18/06/2025",
+				"imsak": "04:17",
+				"subuh": "04:27",
+				"terbit": "05:45",
+				"dhuha": "06:14",
+				"dzuhur": "11:43",
+				"ashar": "15:03",
+				"maghrib": "17:34",
+				"isya": "18:48",
+				"date": "2025-06-18"
+			},
+			{
+				"tanggal": "Kamis, 19/06/2025",
+				"imsak": "04:17",
+				"subuh": "04:27",
+				"terbit": "05:45",
+				"dhuha": "06:14",
+				"dzuhur": "11:43",
+				"ashar": "15:03",
+				"maghrib": "17:34",
+				"isya": "18:49",
+				"date": "2025-06-19"
+			},
+			{
+				"tanggal": "Jumat, 20/06/2025",
+				"imsak": "04:17",
+				"subuh": "04:27",
+				"terbit": "05:45",
+				"dhuha": "06:14",
+				"dzuhur": "11:43",
+				"ashar": "15:04",
+				"maghrib": "17:35",
+				"isya": "18:49",
+				"date": "2025-06-20"
+			},
+			{
+				"tanggal": "Sabtu, 21/06/2025",
+				"imsak": "04:17",
+				"subuh": "04:27",
+				"terbit": "05:45",
+				"dhuha": "06:14",
+				"dzuhur": "11:44",
+				"ashar": "15:04",
+				"maghrib": "17:35",
+				"isya": "18:49",
+				"date": "2025-06-21"
+			},
+			{
+				"tanggal": "Minggu, 22/06/2025",
+				"imsak": "04:17",
+				"subuh": "04:27",
+				"terbit": "05:45",
+				"dhuha": "06:15",
+				"dzuhur": "11:44",
+				"ashar": "15:04",
+				"maghrib": "17:35",
+				"isya": "18:49",
+				"date": "2025-06-22"
+			},
+			{
+				"tanggal": "Senin, 23/06/2025",
+				"imsak": "04:18",
+				"subuh": "04:28",
+				"terbit": "05:46",
+				"dhuha": "06:15",
+				"dzuhur": "11:44",
+				"ashar": "15:04",
+				"maghrib": "17:35",
+				"isya": "18:50",
+				"date": "2025-06-23"
+			},
+			{
+				"tanggal": "Selasa, 24/06/2025",
+				"imsak": "04:18",
+				"subuh": "04:28",
+				"terbit": "05:46",
+				"dhuha": "06:15",
+				"dzuhur": "11:44",
+				"ashar": "15:05",
+				"maghrib": "17:35",
+				"isya": "18:50",
+				"date": "2025-06-24"
+			},
+			{
+				"tanggal": "Rabu, 25/06/2025",
+				"imsak": "04:18",
+				"subuh": "04:28",
+				"terbit": "05:46",
+				"dhuha": "06:15",
+				"dzuhur": "11:44",
+				"ashar": "15:05",
+				"maghrib": "17:36",
+				"isya": "18:50",
+				"date": "2025-06-25"
+			},
+			{
+				"tanggal": "Kamis, 26/06/2025",
+				"imsak": "04:18",
+				"subuh": "04:28",
+				"terbit": "05:46",
+				"dhuha": "06:16",
+				"dzuhur": "11:45",
+				"ashar": "15:05",
+				"maghrib": "17:36",
+				"isya": "18:50",
+				"date": "2025-06-26"
+			},
+			{
+				"tanggal": "Jumat, 27/06/2025",
+				"imsak": "04:18",
+				"subuh": "04:28",
+				"terbit": "05:46",
+				"dhuha": "06:16",
+				"dzuhur": "11:45",
+				"ashar": "15:05",
+				"maghrib": "17:36",
+				"isya": "18:50",
+				"date": "2025-06-27"
+			},
+			{
+				"tanggal": "Sabtu, 28/06/2025",
+				"imsak": "04:19",
+				"subuh": "04:29",
+				"terbit": "05:47",
+				"dhuha": "06:16",
+				"dzuhur": "11:45",
+				"ashar": "15:05",
+				"maghrib": "17:36",
+				"isya": "18:51",
+				"date": "2025-06-28"
+			},
+			{
+				"tanggal": "Minggu, 29/06/2025",
+				"imsak": "04:19",
+				"subuh": "04:29",
+				"terbit": "05:47",
+				"dhuha": "06:16",
+				"dzuhur": "11:45",
+				"ashar": "15:06",
+				"maghrib": "17:37",
+				"isya": "18:51",
+				"date": "2025-06-29"
+			},
+			{
+				"tanggal": "Senin, 30/06/2025",
+				"imsak": "04:19",
+				"subuh": "04:29",
+				"terbit": "05:47",
+				"dhuha": "06:16",
+				"dzuhur": "11:45",
+				"ashar": "15:06",
+				"maghrib": "17:37",
+				"isya": "18:51",
+				"date": "2025-06-30"
+			}
+		]
+	}
+}
+```
+
+</details>

@@ -1,0 +1,109 @@
+---
+sidebar_position: 5
+---
+
+# Get Hijri Calendar (Islamic Calendar)
+
+Here are some examples of how to get Hijri Calendar (Islamic Calendar) using the API.
+
+## Today's date in Hijri Calendar
+
+API Muslim v2 has default time zone set to _Waktu Indonesia Barat_ (WIB)/ UTC+7. Using this endpoint, you can get today's date in Hijri calendar
+
+```http title="Basic Endpoint"
+https://api.myquran.com/v2/cal/hijr
+```
+
+:::info
+
+API Muslim v2 accepts these parameters, you can choose one of them
+
+```http title="Without parameter name, just passing the value"
+https://api.myquran.com/v2/cal/hijr/-1
+```
+
+```http title="With parameter name and specifying the value"
+https://api.myquran.com/v2/cal/hijr?adj=-1
+```
+
+:::
+
+By default,`adj` (adjustment) parameter set to `-1` when using this basic endpoint, without the need of explicitly set the value or `adj` parameter.
+
+### Basic example
+
+In this example, we will get today's date (27 June 2025) in Hijri Calendar without additional parameters. More thorough examples can be found in `Islamic Calendar` section (in-progress).
+
+:::info
+
+While `Islamic Calendar` page being worked on, feel free to check the official documentation for Hijri calendar here: [API Muslim v2 - Calendars](https://documenter.getpostman.com/view/841292/2s9YsGittd#c841b400-3a67-48dc-9189-ab3ebf8166e6)
+
+:::
+
+```http title="HTTP GET"
+https://api.myquran.com/v2/cal/hijr
+```
+
+```json title="Response"
+{
+	"status": true,
+	"request": {
+		"path": "/cal/hijr",
+		"date": "2025-06-27",
+		"adj": -1
+	},
+	"data": {
+		"date": ["Jum'at", "1 Muharram 1447 H", "27-06-2025"],
+		"num": [6, 27, 6, 2025, 1, 1, 1447]
+	}
+}
+```
+
+## List of day's names in Hijri Calendar
+
+```http title="HTTP GET"
+https://api.myquran.com/v2/cal/list/days
+```
+
+```json title="Response"
+{
+	"status": true,
+	"request": {
+		"path": "/cal/list/days"
+	},
+	"data": {
+		"id": ["Ahad", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"]
+	}
+}
+```
+
+## List of index for months in Hijri Calendar
+
+```http title="HTTP GET"
+https://api.myquran.com/v2/cal/list/months
+```
+
+```json title="Response"
+{
+	"status": true,
+	"request": {
+		"path": "/cal/list/months"
+	},
+	"data": {
+		"id": [
+			"Muharram",
+			"Safar",
+			"Rabiul Awal",
+			"Rabiul Akhir",
+			"Jumadil Awal",
+			"Jumadil Akhir",
+			"Rajab",
+			"Syaban",
+			"Ramadhan",
+			"Syawal",
+			"Zulkaidah",
+			"Dzulhijjah"
+		]
+	}
+}
+```
