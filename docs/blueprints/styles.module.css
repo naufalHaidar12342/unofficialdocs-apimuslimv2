@@ -1,0 +1,51 @@
+@import url("@site/src/css/custom.css");
+
+.wrapper {
+	display: grid;
+	gap: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+	.wrapper {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+.tools {
+	display: flex;
+	flex-direction: column;
+	gap: 1.2rem;
+}
+
+.technologyCard {
+	/* background-color: inherit; */
+
+	/* Adjusted for better contrast */
+
+	text-decoration: none;
+	border-radius: 0.5rem;
+	padding: 1.2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+
+	transition-property: color, background-color;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}
+/* :hover .technologyCard {
+	color: #f8f8f8;
+	background-color: var(--ifm-color-primary-lighter);
+	transition-property: color, background-color;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+} */
+
+/* .technologyCard:has(.technologyIcon){
+
+}
+
+
+.technologyIcon {
+	opacity: 0;
+} */

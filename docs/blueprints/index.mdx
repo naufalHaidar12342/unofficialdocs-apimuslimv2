@@ -1,0 +1,50 @@
+---
+sidebar_position: 2
+---
+
+import styles from "./styles.module.css";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import Link from "@docusaurus/Link";
+import { CornerUpRight, MoveRight } from "lucide-react";
+
+# Blueprints
+
+To get you up and running quickly, here are several examples on how you could use API Muslim v2 in your projects.
+
+<Tabs>
+	<TabItem value="Frameworks">
+		<div className={`${styles.wrapper}`}>
+			<div className={`${styles.tools}`} aria-label="First column">
+				<div className={`${styles.technologyCard}`}>
+					<Link to={`/docs/blueprints/nextjs/`} style={{ display: "flex",flexDirection:"row", alignItems:"center", columnGap:"0.4rem" }}>
+						<span style={{fontWeight:"600",fontSize:"1.5rem"}}>Next.js</span>
+						<MoveRight />
+					</Link>
+					<p>
+					Next.js is a React framework that enables you to build server-side
+					rendered applications with ease.
+					</p>
+				</div>
+			</div>
+			<div className={`${styles.tools}`} aria-label="Second column">
+			<div className={`${styles.technologyCard}`}>
+					<Link to={`/docs/blueprints/`} style={{ display: "flex",flexDirection:"row", alignItems:"center", columnGap:"0.4rem" }}>
+						<span style={{fontWeight:"600",fontSize:"1.5rem"}}>Coming soon</span>
+						{/* <MoveRight /> */}
+					</Link>
+					<p>
+					More examples will be added soon, including frameworks like Nuxt.js, SvelteKit, and others.
+					</p>
+				</div>
+			</div>
+		</div>
+    </TabItem>
+    {/* <TabItem value="Other">
+		<div className={`${styles.wrapper}`}>
+			<div className={`${styles.tools}`}></div>
+			<div className={`${styles.tools}`}>TypeScript</div>
+		</div>
+	</TabItem> */}
+
+</Tabs>

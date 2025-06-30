@@ -44,13 +44,12 @@ export default function Home(): ReactNode {
 			description="Unofficial documentation by me for API Muslim v2"
 		>
 			<HomepageHeader />
-			<main>
-				<p>
-					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia
-					totam in suscipit hic aperiam beatae cupiditate adipisci rerum harum
-					odio fugiat debitis, sequi alias sit necessitatibus? Harum esse quo
-					non.
-				</p>
+			<main className="">
+				<section className={"hero hero--secondary" + " " + styles.heroBanner}>
+					<div className="container">
+						<Heading as="h2">Features</Heading>
+					</div>
+				</section>
 			</main>
 		</Layout>
 	);

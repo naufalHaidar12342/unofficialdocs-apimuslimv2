@@ -139,6 +139,8 @@ const config: Config = {
 			defaultMode: "dark",
 		},
 	} satisfies Preset.ThemeConfig,
+
+	themes: ["@docusaurus/theme-live-codeblock"],
 };
 
 export default config;
